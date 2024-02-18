@@ -29,6 +29,7 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
   void updateAge(int newAge) {
     setState(() {
       age = newAge;
+      isSubmitted = false;
       if (isSubmitted) {
         verifyInfo();
       }
@@ -38,6 +39,7 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
   void updateWeight(int newWeight) {
     setState(() {
       weight = newWeight;
+      isSubmitted = false;
       if (isSubmitted) {
         verifyInfo();
       }
@@ -47,6 +49,7 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
   void updateHeight(int newHeight) {
     setState(() {
       height = newHeight;
+      isSubmitted = false;
       if (isSubmitted) {
         verifyInfo();
       }
@@ -54,13 +57,13 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
   }
 
   void verifyInfo() {
-    if (!(weight < 800 || height > 8 || age > 130)) {
+    if (!(weight < 800 || height > 108 || age > 130)) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('You are a medical miracle'),
-            content: Text('The weight must be under 800, the height must be under 8, or the age must be under 130.'),
+            content: Text('The weight must be under 800, the height must be under 108, or the age must be under 130.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
@@ -84,7 +87,7 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
 
   void resetSubmit() {
     setState(() {
-      isSubmitted = false;
+      isSubmitted = true;
     });
   }
 
@@ -185,10 +188,12 @@ class MedicationList extends StatelessWidget {
         String medication = medications[index];
         TextStyle style = TextStyle(color: Colors.black);
 
-        if (isSubmitted && ((weight > 150 && medication == 'Aspirin') ||
+        if (isSubmitted) {
+          if(((weight > 150 && medication == 'Aspirin') ||
             (height > 40 && medication == 'Levothyroxine') ||
             (age > 80 && medication == 'Lisinopril'))) {
-          style = TextStyle(color: Colors.red);
+              style = TextStyle(color: Colors.red);
+            }
         }
 
         return ListTile(
