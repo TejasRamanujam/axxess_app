@@ -113,7 +113,7 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
                 child: Text('Submit'),
               ),
               SizedBox(height: 32.0),
-              Text('List of prescription medication names:', style: TextStyle(fontSize: 18.0)),
+              Text('List of prescription medication:', style: TextStyle(fontSize: 18.0)),
               SizedBox(height: 16.0),
               MedicationList(age: age, weight: weight, height: height, isSubmitted: isSubmitted),
             ],
