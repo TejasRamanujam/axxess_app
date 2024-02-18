@@ -92,25 +92,30 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Health App'),
+        title: Text('Home Health'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Please enter your information:', style: TextStyle(fontSize: 18.0)),
+            Center(
+            child: Text('Please enter your information:', style: TextStyle(fontSize: 18.0))),
             SizedBox(height: 16.0),
             HealthInfoForm(updateAge, updateWeight, updateHeight),
             SizedBox(height: 32.0),
-            ElevatedButton(
+            Center(child: ElevatedButton(
               onPressed: isSubmitted ? resetSubmit : submitInfo,
               child: Text('Submit'),
-            ),
+            )),
             SizedBox(height: 32.0),
-            Text('List of prescription medication names:', style: TextStyle(fontSize: 18.0)),
+            Center(
+              child:Text('List of prescription medication names:', style: TextStyle(fontSize: 18.0))
+            ),
             SizedBox(height: 16.0),
-            MedicationList(age: age, weight: weight, height: height, isSubmitted: isSubmitted),
+            MedicationList(age: age, weight: weight, height: height, isSubmitted: isSubmitted)
+
           ],
         ),
       ),
@@ -131,16 +136,19 @@ class HealthInfoForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         TextFormField(
+          textAlign: TextAlign.center,
           onChanged: (value) => onAgeChanged(int.tryParse(value) ?? 0),
-          decoration: InputDecoration(labelText: 'Age'),
+          decoration: InputDecoration(hintText: 'Age'),
         ),
         TextFormField(
           onChanged: (value) => onWeightChanged(int.tryParse(value) ?? 0),
-          decoration: InputDecoration(labelText: 'Weight (lbs)'),
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(hintText: 'Weight (lbs)'),
         ),
         TextFormField(
           onChanged: (value) => onHeightChanged(int.tryParse(value) ?? 0),
-          decoration: InputDecoration(labelText: 'Height (inches)'),
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(hintText: 'Height (inches)'),
         ),
       ],
     );
